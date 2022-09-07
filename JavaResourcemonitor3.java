@@ -40,7 +40,7 @@ public class JavaResourcemonitor3 {
     Long lastNano = System.nanoTime();
         while(true)
         {
-          Thread.sleep(500);
+          Thread.sleep(1000);
             try
             {
                 int j = 0;
