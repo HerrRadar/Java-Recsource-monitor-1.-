@@ -7,29 +7,34 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime; 
 
-public class JavaResourcemonitor3 {
-    public static void main(String[] args) throws InterruptedException {
-        try {
-          File myObj = new File("C:\\Users\\Christian.lund\\Documents\\Java Recsource monitor 1.+\\CPUusageTimeline.txt");
-          if (myObj.createNewFile()) {
+public class JavaResourcemonitor3 
+{
+    public static void main(String[] args) throws InterruptedException 
+    {
+        try 
+        {
+          File myObj = new File("C:\\Users\\gdixz\\Java Recsource monitor 1.+");
+          if (myObj.createNewFile()) 
+          {
             System.out.println("File created: " + myObj.getName());
           } 
           else {
             System.out.println("File already exists.");
           }
         } 
-        catch (IOException e) {
+        catch (IOException e) 
+        {
           System.out.println("An error occurred.");
           e.printStackTrace();
         }
         ThreadMXBean ThreadBean = ManagementFactory.getThreadMXBean();
 
           try
-        {
+          {
          if (ThreadBean.isThreadCpuTimeSupported())
-                ThreadBean.setThreadCpuTimeEnabled(true);
-            else
-                throw new AccessDeniedException("");
+              ThreadBean.setThreadCpuTimeEnabled(true);
+          else
+              throw new AccessDeniedException("");
     }
     catch (AccessDeniedException e)
     {
@@ -58,7 +63,8 @@ public class JavaResourcemonitor3 {
             System.out.println(CPULOAD + "% usage" + "    " + ThreadTime + "    " + Nano);
             lastThreadTime = ThreadTime;
             lastNano=Nano;
-        try {        
+        try 
+        {        
             DateTimeFormatter tid = DateTimeFormatter.ofPattern("HH:mm:ss");  
             LocalDateTime nu = LocalDateTime.now(); 
             
@@ -69,7 +75,8 @@ public class JavaResourcemonitor3 {
             out.write("CPU Usage:    " + CPULOAD + "%    Time:" + (tid.format(nu))+ "");
             out.close();
               }
-            catch (IOException o) {
+            catch (IOException o) 
+            {
             System.out.println("An error occurred.");
             o.printStackTrace();
         } 
