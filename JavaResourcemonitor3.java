@@ -13,7 +13,7 @@ public class JavaResourcemonitor3
     {
         try 
         {
-          File myObj = new File("C:\\Users\\gdixz\\Java Recsource monitor 1.+");
+          File myObj = new File("C:\\Java Recsource monitor 1.+");
           if (myObj.createNewFile()) 
           {
             System.out.println("File created: " + myObj.getName());
