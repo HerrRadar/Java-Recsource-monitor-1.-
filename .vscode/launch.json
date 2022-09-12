@@ -6,30 +6,9 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch JavaResourcemonitor3",
-            "request": "launch",
-            "mainClass": "JavaResourcemonitor3",
-            "projectName": "Java Recsource monitor 1.+_dbd3e1a8"
-        },
-        {
-            "type": "java",
-            "name": "Launch JavaResourcemonitor2",
-            "request": "launch",
-            "mainClass": "JavaResourcemonitor2",
-            "projectName": "Java Recsource monitor 1.+_dbd3e1a8"
-        },
-        {
-            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "Launch JavaResourcemonitor1",
-            "request": "launch",
-            "mainClass": "JavaResourcemonitor1",
-            "projectName": "Java Recsource monitor 1.+_dbd3e1a8"
         }
     ]
 }

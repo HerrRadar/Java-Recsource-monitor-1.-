@@ -8,9 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime; 
 
 public class JavaResourcemonitor3 {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException 
+    {
         try {
-          File myObj = new File("C:\\Users\\Christian.lund\\Documents\\Java Recsource monitor 1.+\\CPUusageTimeline.txt");
+          File myObj = new File("logs\\CPULOG.txt");
           if (myObj.createNewFile()) {
             System.out.println("File created: " + myObj.getName());
           } 
@@ -40,7 +41,7 @@ public class JavaResourcemonitor3 {
     Long lastNano = System.nanoTime();
         while(true)
         {
-          Thread.sleep(500);
+          Thread.sleep(1000);
             try
             {
                 int j = 0;
@@ -62,7 +63,7 @@ public class JavaResourcemonitor3 {
             DateTimeFormatter tid = DateTimeFormatter.ofPattern("HH:mm:ss");  
             LocalDateTime nu = LocalDateTime.now(); 
             
-            FileWriter myWriter = new FileWriter("CPUusageTimeline.txt", true);
+            FileWriter myWriter = new FileWriter("CPULOG.txt", true);
             BufferedWriter bw = new BufferedWriter(myWriter);
             PrintWriter out = new PrintWriter(bw);
             out.write(System.getProperty( "line.separator"));

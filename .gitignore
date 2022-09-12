@@ -1,3 +1,2 @@
-**/logs
-.vs
-.vscode
+**.txt
+/CPULOG.txt/*
