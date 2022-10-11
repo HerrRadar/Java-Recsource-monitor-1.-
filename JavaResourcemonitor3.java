@@ -22,18 +22,19 @@ class JRmCPU
             System.out.println("File already exists.");
           }
         } 
-        catch (IOException e) {
+        catch (IOException e) 
+        {
           System.out.println("An error occurred.");
           e.printStackTrace();
         }
         ThreadMXBean ThreadBean = ManagementFactory.getThreadMXBean();
 
           try
-        {
+          {
          if (ThreadBean.isThreadCpuTimeSupported())
-                ThreadBean.setThreadCpuTimeEnabled(true);
-            else
-                throw new AccessDeniedException("");
+              ThreadBean.setThreadCpuTimeEnabled(true);
+          else
+              throw new AccessDeniedException("");
     }
     catch (AccessDeniedException e)
     {
@@ -62,7 +63,8 @@ class JRmCPU
             System.out.println(CPULOAD + "% usage" + "    " + ThreadTime + "    " + Nano);
             lastThreadTime = ThreadTime;
             lastNano=Nano;
-        try {        
+        try 
+        {        
             DateTimeFormatter tid = DateTimeFormatter.ofPattern("HH:mm:ss");  
             LocalDateTime nu = LocalDateTime.now(); 
             
@@ -73,7 +75,8 @@ class JRmCPU
             out.write("CPU Usage:    " + CPULOAD + "%    Time:" + (tid.format(nu))+ "");
             out.close();
               }
-            catch (IOException o) {
+            catch (IOException o) 
+            {
             System.out.println("An error occurred.");
             o.printStackTrace();
         } 
