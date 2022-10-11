@@ -1,8 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+import java.awt.Dimension;
 import javax.swing.SwingUtilities;
+
+import JavaResourcemonitor3.JRmCPU;
 
 public class MainGUI extends JPanel implements ActionListener 
 {//Variables
@@ -24,9 +26,6 @@ MainGUI()
     JRMGUI.setMaximizedBounds(new Rectangle(0,0 , 1280, 720)); 
     JRMGUI.setMinimumSize(new Dimension(1280,720));
     JRMGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    JRMGUI.getContentPane().setBackground( Color.black );
-    JRMGUI.add(new MyPanel());
-    JRMGUI.pack();
 
     //Button Settings
     Next = new JButton("Next");
@@ -96,22 +95,14 @@ MainGUI()
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                createAndShowGUI(); 
+                main(); 
             }
         });
     }
-    private static void createAndShowGUI() {
+    private static void main() {
         System.out.println("Created GUI on EDT? "+
         SwingUtilities.isEventDispatchThread());
-    }
-    public void paintComponent(graphic g) 
-    {
-        super.paintComponent(g);       
-
-        // Draw Text
-        g.drawString("This is my custom Panel!",10,20);
-        g.setColor(Color.white);
-        JRMGUI.add(g);
         new MainGUI();
-    }  
+        Println(CPULOAD.JRmCPU);
+    }
 }
