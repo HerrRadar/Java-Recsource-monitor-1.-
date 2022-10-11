@@ -6,8 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;  
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime; 
+import javax.swing.*;
 
 public class JavaResourcemonitor3 {
+class JRmCPU
+{
     public static void main(String[] args) throws InterruptedException 
     {
         try {
@@ -76,4 +79,11 @@ public class JavaResourcemonitor3 {
         } 
     }
     }
+}
+
+class GUI
+{
+//TBD
+}
+
 }

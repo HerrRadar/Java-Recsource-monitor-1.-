@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch SwingPaintDemo2",
+            "request": "launch",
+            "mainClass": "SwingPaintDemo2",
+            "projectName": "Java-Recsource-monitor-1.-_c5edb78d"
+        },
+        {
+            "type": "java",
+            "name": "Launch DrawGraph",
+            "request": "launch",
+            "mainClass": "DrawGraph",
+            "projectName": "Java-Recsource-monitor-1.-_c5edb78d"
+        },
+        {
+            "type": "java",
+            "name": "Launch MainGUI",
+            "request": "launch",
+            "mainClass": "MainGUI",
+            "projectName": "Java-Recsource-monitor-1.-_c5edb78d"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
