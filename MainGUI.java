@@ -4,8 +4,6 @@ import java.awt.event.*;
 import java.awt.Dimension;
 import javax.swing.SwingUtilities;
 
-import JavaResourcemonitor3.JRmCPU;
-
 public class MainGUI extends JPanel implements ActionListener 
 {//Variables
 JFrame JRMGUI;
