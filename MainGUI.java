@@ -2,17 +2,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.Dimension;
-import javax.swing.SwingUtilities;
+import org.knowm.xchart.*;
+import java.io.*;
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadMXBean;
+import java.nio.file.AccessDeniedException;
+import java.io.FileWriter;  
+import java.io.IOException;  
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.time.LocalDateTime; 
 
-public class MainGUI extends JPanel implements ActionListener 
+public class MainGUI implements ActionListener, SwingWorker<Boolean, double[]>
 {//Variables
-JFrame JRMGUI;
-JButton Next;
-JButton Previous;
-JButton Toggle;
-JButton CPU;
-JButton Reset;
-JButton Open_in_explorer;
+    JFrame JRMGUI;
+    JButton Next;
+    JButton Previous;
+    JButton Toggle;
+    JButton CPU;
+    JButton Reset;
+    JButton Open_in_explorer;
 
 MainGUI()
 {   //Frame Settings
@@ -90,17 +99,158 @@ MainGUI()
             }
         }
     }
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                main(); 
-            }
-        });
-    }
-    private static void main() {
-        System.out.println("Created GUI on EDT? "+
-        SwingUtilities.isEventDispatchThread());
+    
+    public static void main(String[] args) throws Exception, InterruptedException
+    {
         new MainGUI();
-        Println(CPULOAD.JRmCPU);
+        try {
+            File myObj = new File("logs\\CPULOG.txt");
+            if (myObj.createNewFile()) {
+              System.out.println("File created: " + myObj.getName());
+            } 
+            else {
+              System.out.println("File already exists.");
+            }
+          } 
+          catch (IOException e) 
+          {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+          }
+          ThreadMXBean ThreadBean = ManagementFactory.getThreadMXBean();
+  
+            try
+            {
+           if (ThreadBean.isThreadCpuTimeSupported())
+                ThreadBean.setThreadCpuTimeEnabled(true);
+            else
+                throw new AccessDeniedException("");
+      }
+      catch (AccessDeniedException e)
+      {
+          System.out.println("CPU Usage monitoring is not available!");
+          System.exit(0);
+      }
+      long lastThreadTime = ThreadBean.getCurrentThreadCpuTime();
+      Long lastNano = System.nanoTime();
+          while(true)
+          {
+            Thread.sleep(1000);
+              try
+              {
+                  int j = 0;
+                  for (int i = 0; i < 20000000; i++)
+                      j = (j + i) * j / 2;
+                  Thread.sleep(10);
+              }
+              catch (InterruptedException e)
+              {
+              }
+              Long Nano = System.nanoTime();
+              Long ThreadTime = ThreadBean.getCurrentThreadCpuTime();
+  
+              Long CPULOAD = (Nano - lastNano)/(ThreadTime - lastThreadTime) ;
+              System.out.println(CPULOAD + "% usage" + "    " + ThreadTime + "    " + Nano);
+              lastThreadTime = ThreadTime;
+              lastNano=Nano;
+          try 
+          {        
+              DateTimeFormatter tid = DateTimeFormatter.ofPattern("HH:mm:ss");  
+              LocalDateTime nu = LocalDateTime.now(); 
+              
+              FileWriter myWriter = new FileWriter("CPULOG.txt", true);
+              BufferedWriter bw = new BufferedWriter(myWriter);
+              PrintWriter out = new PrintWriter(bw);
+              out.write(System.getProperty( "line.separator"));
+              out.write("CPU Usage:    " + CPULOAD + "%    Time:" + (tid.format(nu))+ "");
+              out.close();
+                }
+              catch (IOException o) 
+              {
+              System.out.println("An error occurred.");
+              o.printStackTrace();
+          } 
+      }
+    }
+    class SwingWorkerRealTime {
+ 
+        MySwingWorker mySwingWorker;
+        SwingWrapper<XYChart> sw;
+        XYChart chart;
+       
+        public static void main(String[] args) throws Exception {
+       
+          SwingWorkerRealTime swingWorkerRealTime = new SwingWorkerRealTime();
+          swingWorkerRealTime.go();
+        }
+       
+        private void go() {
+       
+          // Create Chart
+          chart = QuickChart.getChart("SwingWorker XChart Real-time Demo", "Time", "Value", "randomWalk", new double[] { 0 }, new double[] { 0 });
+          chart.getStyler().setLegendVisible(false);
+          chart.getStyler().setXAxisTicksVisible(false);
+       
+          // Show it
+          sw = new SwingWrapper<XYChart>(chart);
+          sw.displayChart();
+       
+          mySwingWorker = new MySwingWorker();
+          mySwingWorker.execute();
+        }
+       
+          public MySwingWorker() {
+       
+            fifo.add(0.0);
+          }
+       
+          @Override
+          protected Boolean doInBackground() throws Exception {
+       
+            while (!isCancelled()) {
+       
+              fifo.add(fifo.get(fifo.size() - 1) + Math.random() - .5);
+              if (fifo.size() > 500) {
+                fifo.removeFirst();
+              }
+       
+              double[] array = new double[fifo.size()];
+              for (int i = 0; i < fifo.size(); i++) {
+                array[i] = fifo.get(i);
+              }
+              publish(array);
+       
+              try {
+                Thread.sleep(5);
+              } catch (InterruptedException e) {
+                // eat it. caught when interrupt is called
+                System.out.println("MySwingWorker shut down.");
+              }
+       
+            }
+       
+            return true;
+          }
+       
+          @Override
+          protected void process(List<double[]> chunks) {
+       
+            System.out.println("number of chunks: " + chunks.size());
+       
+            double[] mostRecentDataSet = chunks.get(chunks.size() - 1);
+       
+            chart.updateXYSeries("randomWalk", null, mostRecentDataSet, null);
+            sw.repaintChart();
+       
+            long start = System.currentTimeMillis();
+            long duration = System.currentTimeMillis() - start;
+            try {
+              Thread.sleep(40 - duration); // 40 ms ==> 25fps
+              // Thread.sleep(400 - duration); // 40 ms ==> 2.5fps
+            } catch (InterruptedException e) {
+            }
+       
+          }
+        }
     }
 }
