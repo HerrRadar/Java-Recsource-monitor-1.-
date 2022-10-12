@@ -11,7 +11,8 @@ public class CPULOAD
 public interface CPUinterface {
 public void CPULOADfile();
 public void CPUcal();
-public void Nano1();
+public void Threadnano1();
+public void Threadnano2();
 }
 
 }
@@ -37,9 +38,9 @@ public static void CPUfile() throws InterruptedIOException
 }
 
 
-class Nano1
+class Threadnano1 
 {
-  public static void Nano1()
+  public static long Nano1() throws InterruptedException
   {
   ThreadMXBean ThreadBean1 = ManagementFactory.getThreadMXBean();
   {
@@ -79,9 +80,9 @@ System.exit(0);
   }
 }
 
-class Nano2
+class Threadnano2
 {
-  public static void Nano2()
+  public static Long Nano2() throws InterruptedException
   {
   ThreadMXBean ThreadBean2 = ManagementFactory.getThreadMXBean();
   {
@@ -114,8 +115,8 @@ System.exit(0);
           catch (InterruptedException e)
           {
           }
-          long Nano2 = System.nanoTime();
-          long ThreadTime2 = ThreadBean2.getCurrentThreadCpuTime();
+          Long Nano2 = System.nanoTime();
+          Long ThreadTime2 = ThreadBean2.getCurrentThreadCpuTime();
         }
       }
   }
@@ -125,15 +126,15 @@ class CPUcal
 {
 public double CPULOADcal() throws InterruptedException
 {
-  Nano1 myNano1 = new Nano1();
-  Nano1.Nano1();
-  Nano2 myNano2 = new Nano2();
-  Nano2.Nano2();
-          long Nano1 = Nano1.Nano1();
-          long Nano2 = Nano2.Nano2();
-          long ThreadTime1 = Nano1.Nano1();
-          long ThreadTime2 = Nano2.Nano2();
-
+      Threadnano1 myNano1 = new Threadnano1();
+      Threadnano1.Nano1();
+      Threadnano2 myNano2 = new Threadnano2();
+      Threadnano2.Nano2();
+          Long Nano1 = myNano1.Nano1();
+          Long Nano2 = myNano2.Nano2();
+          Long ThreadTime1 = myNano1.Nano1();
+          Long ThreadTime2 = myNano2.Nano2();
+          {
           long CPUNanoTime = Nano1 - Nano2;
           long CPUThreadTime = ThreadTime1 - ThreadTime2;
           long CPULOADdata = CPUNanoTime /  CPUThreadTime;
@@ -156,7 +157,9 @@ public double CPULOADcal() throws InterruptedException
           {
           System.out.println("An error occurred.");
           o.printStackTrace();
-      } 
+          }
+      }
+          return ThreadTime2; 
   }
 }
 
