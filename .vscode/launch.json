@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch MainGUI",
+            "request": "launch",
+            "mainClass": "MainGUI",
+            "projectName": "Java Recsource monitor 1.+_878585f5"
+        },
+        {
+            "type": "java",
             "name": "Launch SwingPaintDemo2",
             "request": "launch",
             "mainClass": "SwingPaintDemo2",
