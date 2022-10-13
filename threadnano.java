@@ -3,7 +3,7 @@ import java.nio.file.*;
 
 public class threadnano 
 {
-  public long Nano1() throws InterruptedException
+  public long Thread1() throws InterruptedException
   {
   ThreadMXBean ThreadBean1 = ManagementFactory.getThreadMXBean();
   {
@@ -36,13 +36,19 @@ System.exit(0);
           catch (InterruptedException e)
           {
           }
-          long Nano1 = System.nanoTime();
           long ThreadTime1 = ThreadBean1.getCurrentThreadCpuTime();
+          return ThreadTime1;
         }
       }
   }
+  public Long Nano1()
+  {
+  Long Nano1 = System.nanoTime();
+  return Nano1;
+  }
+  
 
-public Long Nano2() throws InterruptedException
+public Long Thread2() throws InterruptedException
 {
 ThreadMXBean ThreadBean2 = ManagementFactory.getThreadMXBean();
 {
@@ -74,10 +80,15 @@ System.exit(0);
           }
           catch (InterruptedException e)
           {
-          }
-          Long Nano2 = System.nanoTime();
-          Long ThreadTime2 = ThreadBean2.getCurrentThreadCpuTime();
         }
+        Long ThreadTime2 = ThreadBean2.getCurrentThreadCpuTime();
+        return ThreadTime2;
       }
+    }
+  }
+  public Long Nano2()
+  {
+    Long Nano2 = System.nanoTime();
+    return Nano2;
   }
 }

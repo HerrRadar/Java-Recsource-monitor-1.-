@@ -7,18 +7,26 @@ public class cpucal
 
       public double CPULOADcal() throws InterruptedException
       {
-      threadnano myNano1 = new threadnano();
-          Long Nano1 = myNano1.Nano1();
-          Long Nano2 = myNano1.Nano2();
-          Long ThreadTime1 = myNano1.Nano1();
-          Long ThreadTime2 = myNano1.Nano2();
-          {
-          long CPUNanoTime = Nano1 - Nano2;
+        threadnano CPUdata = new threadnano();
+        Long ThreadTime1 = (long)10;
+        Long Nano1 = (long)10;
+        Long ThreadTime2 = (long)10;
+        Long Nano2 = (long)10;
+        while(true)
+        { 
+           ThreadTime1 = CPUdata.Thread1();
+           Nano1 = CPUdata.Nano1();
+           ThreadTime2 = CPUdata.Thread2();
+           Nano2 = CPUdata.Nano2();
           long CPUThreadTime = ThreadTime1 - ThreadTime2;
+          long CPUNanoTime = Nano1 - Nano2;
+
+          {
           long CPULOADdata = CPUNanoTime /  CPUThreadTime;
           System.out.println(CPULOADdata + "% usage" + "    " + Nano1 + "    " + ThreadTime1);
 
           double CPULOAD = (long)CPULOADdata;
+          
       try 
       {        
           DateTimeFormatter tid = DateTimeFormatter.ofPattern("HH:mm:ss");  
@@ -36,13 +44,8 @@ public class cpucal
           System.out.println("An error occurred.");
           o.printStackTrace();
           }
+          return CPULOAD;
       }
-          return ThreadTime2; 
-  }
- //simple confirm action
-  public String CPUconfirm()
-  {
-    String confirm1 = "Confirmed CPUCAL";
-    return confirm1;
+    }
   }
 }
