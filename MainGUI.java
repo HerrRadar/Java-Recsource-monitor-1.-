@@ -24,14 +24,14 @@ class Main //Main thread
                   do
                   {
                   x1 = myCPU.CPULOADcal();
-                  Thread.sleep(200);
+                  Thread.sleep(1000);
                   x2 = myCPU.CPULOADcal();
-                  Thread.sleep(200);
+                  Thread.sleep(1000);
                   x3 = myCPU.CPULOADcal();
                   break;
                   }while(true);
-                  double[] xData = new double[] { 60.0, 30.0, 0.0 };
-                  double[] yData = new double[] { x3 , x2 , x1 };
+                  double[] xData = new double[] { 0.0, 30.0, 60.0 };
+                  double[] yData = new double[] { x1 , x2 , x3 };
                   System.out.println("Running program:  " + "x1 value:  " + x1 + "x2 value:  " + x2 + "x3 value:  " + x3 );
                   // creating the Chart
                   XYChart chart = QuickChart.getChart("chart", "X", "Y", "y(x)", xData, yData);

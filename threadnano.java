@@ -21,12 +21,7 @@ System.exit(0);
 }
       while(true)
       {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e1) {
-            e1.printStackTrace();
-        }
-          try
+        try
           {
               int j = 0;
               for (int i = 0; i < 20000000; i++)
@@ -37,7 +32,14 @@ System.exit(0);
           {
           }
           long ThreadTime1 = ThreadBean1.getCurrentThreadCpuTime();
+          Thread.sleep(10);
+          if(ThreadBean1 .equals((long)0))
+          {
           return ThreadTime1;
+          }else
+          {
+          System.out.println(ThreadTime1/ThreadTime1);
+          }
         }
       }
   }
@@ -66,12 +68,7 @@ System.exit(0);
 }
       while(true)
       {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e1) {
-            e1.printStackTrace();
-        }
-          try
+        try
           {
               int j = 0;
               for (int i = 0; i < 20000000; i++)
@@ -82,7 +79,14 @@ System.exit(0);
           {
         }
         Long ThreadTime2 = ThreadBean2.getCurrentThreadCpuTime();
+        Thread.sleep(10);
+        if(ThreadBean2 .equals((long)0))
+        {
         return ThreadTime2;
+        }else
+        {
+        System.out.println(ThreadTime2/ThreadTime2);
+        }
       }
     }
   }

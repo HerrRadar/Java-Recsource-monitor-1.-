@@ -8,23 +8,24 @@ public class cpucal
       public double CPULOADcal() throws InterruptedException
       {
         threadnano CPUdata = new threadnano();
-        Long ThreadTime1 = (long)10;
-        Long Nano1 = (long)10;
-        Long ThreadTime2 = (long)10;
-        Long Nano2 = (long)10;
+        long ThreadTime1 = (long)10;
+        long Nano1 = (long)10;
+        long ThreadTime2 = (long)10;
+        long Nano2 = (long)10;
         while(true)
         { 
            ThreadTime1 = CPUdata.Thread1();
            Nano1 = CPUdata.Nano1();
+           Thread.sleep(500);
            ThreadTime2 = CPUdata.Thread2();
            Nano2 = CPUdata.Nano2();
-          long CPUThreadTime = ThreadTime1 - ThreadTime2;
-          long CPUNanoTime = Nano1 - Nano2;
+          long CPUThreadTime = ThreadTime2 - ThreadTime1;
+          long CPUNanoTime = Nano2 - Nano1;
 
           {
+            System.out.println(""+CPUNanoTime+" :/: "+CPUThreadTime);
           long CPULOADdata = CPUNanoTime /  CPUThreadTime;
-          System.out.println(CPULOADdata + "% usage" + "    " + Nano1 + "    " + ThreadTime1);
-
+          System.out.println(CPULOADdata + "% usage" + "    " + Nano1 + "  " + Nano2 + "  Thread  " + ThreadTime1 + "  " + ThreadTime2);
           double CPULOAD = (long)CPULOADdata;
           
       try 
