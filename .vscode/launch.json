@@ -9,6 +9,13 @@
             "name": "Launch MainGUI$Main",
             "request": "launch",
             "mainClass": "MainGUI$Main",
+            "projectName": "Java-Recsource-monitor-1.-_c1c0877d"
+        },
+        {
+            "type": "java",
+            "name": "Launch MainGUI$Main",
+            "request": "launch",
+            "mainClass": "MainGUI$Main",
             "projectName": "Java Recsource monitor 1.+_878585f5"
         },
         {
